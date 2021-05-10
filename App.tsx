@@ -62,6 +62,9 @@ const Section: React.FC<{
 };
 
 const App = () => {
+  /**
+   * The issue arise when there is a loading period
+   */
   const [loading, setLoading] = useState(true);
 
   const actionColor = '#1C1C1C';
@@ -127,7 +130,9 @@ const App = () => {
         </View>
       </Animated.ScrollView>
       <View style={styles.header}>
-        <HomeIcon color={baseColor} />
+        <View style={styles.iconContainer}>
+          <HomeIcon color={baseColor} />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -155,6 +160,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     top: 0,
     height: 50,
+    left: 0,
+    right: 0,
+    justifyContent: 'center',
+    padding: 16,
+  },
+  iconContainer: {
+    borderWidth: 1,
+    borderColor: 'red',
+    alignSelf: 'flex-start',
   },
 });
 
