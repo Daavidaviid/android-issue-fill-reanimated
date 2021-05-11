@@ -23,6 +23,8 @@ import Animated, {
   useDerivedValue,
   useSharedValue,
 } from 'react-native-reanimated';
+
+// @androidIssue HomeIcon is the icon we're trying to animate
 import {HomeIcon} from './src/components/HomeIcon';
 
 import {
@@ -63,15 +65,18 @@ const Section: React.FC<{
 
 const App = () => {
   /**
-   * The issue arise when there is a loading period
+   * @androidIssue The issue arise when there is a loading period
    */
   const [loading, setLoading] = useState(true);
 
   const actionColor = '#1C1C1C';
   const initialColor = '#4fd34b';
   const isDarkMode = useColorScheme() === 'dark';
+  
+  // @androidIssue scrollY is used to animated the HomeIcon
   const scrollY = useSharedValue(0);
 
+  // @androidIssue the scroll handler used to animate scrollY
   const scrollHandler = useAnimatedScrollHandler(event => {
     scrollY.value = event.contentOffset.y;
   });
@@ -131,6 +136,7 @@ const App = () => {
       </Animated.ScrollView>
       <View style={styles.header}>
         <View style={styles.iconContainer}>
+          {/** @androidIssue the animation causing an issue is here */}
           <HomeIcon color={baseColor} />
         </View>
       </View>
